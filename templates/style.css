@@ -1,0 +1,33 @@
+:root {
+    font-size: 16px ;
+    font-family: 'Open Sans' ;
+    --text-primary: #bababa ;
+    --text-secondary: #d7d7d7 ;
+    --bg-primary: #181818 ;
+    --bg-secondary: #252525 ;
+    --transition-speed: 450ms ;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: black;
+    background-color: white;
+}
+
+body::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+body::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #d06aff;
+}
+
+main {
+    margin-left: 7rem;
+    padding: 1rem;
+}
