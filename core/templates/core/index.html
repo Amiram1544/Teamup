@@ -1,4 +1,8 @@
 {% extends 'navbar.html' %}
 {% block content %}
-    <h1>Hello world</h1>
+    {% if user.is_authenticated %}
+        <h2>Logged in</h2>
+    {% else %}
+    <p>log in</p>
+    {% endif %}
 {% endblock content %}

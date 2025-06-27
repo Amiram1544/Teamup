@@ -19,7 +19,7 @@ def loginpage(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         
-        user = authenticate(request, usename=username, password=password)
+        user = authenticate(request, username=username, password=password)
         
         if user is not None:
             login(request, user)
@@ -55,4 +55,8 @@ def registerpage(request):
         'form': form,
     }
     
-    return render(request, 'core/login_register.html', context)         
+    return render(request, 'core/login_register.html', context)    
+
+def logoutpage(request):
+    logout(request)
+    return redirect('home')     
