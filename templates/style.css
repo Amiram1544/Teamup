@@ -38,15 +38,23 @@ main {
     list-style: none;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     align-items: center;
     padding: 0;
     margin: 0;
     width: 100%;
+    justify-content: space-between;
+
 }
 
 .navbar {
     position: fixed;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     background-color: var(--bg-primary);
     transition: width 600ms ease;
 }
@@ -55,7 +63,7 @@ main {
     width: 100%;
 }
 
-.nav-items:last-child {
+.contact-us {
     margin-top: auto;
 }
 
@@ -64,9 +72,12 @@ main {
     align-items: center;
     height: 5rem;
     color: var(--text-primary);
-    filter: grayscale(100%) opacity(.7);
+    filter: grayscale(100%) opacity(0.7);
     text-decoration: none;
     transition: var(--transition-speed);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.1rem;
 }
 
 .nav-link:hover {
@@ -88,6 +99,8 @@ main {
     letter-spacing: 1px;
     text-align: center;
     width: 100%;
+    overflow: hidden;
+    padding: 1rem;
 }
 
 .logo-text {
@@ -100,3 +113,28 @@ main {
 .navbar:hover .logo {
  transition: var(--transition-speed) ease-in;
 }
+
+ /* PC */
+@media only screen and (min-width: 600px) {
+    .navbar {
+        top: 0;
+        width: 5rem;
+        height: 100vh;
+    }
+
+    .navbar:hover {
+        width: 15rem;
+    }
+
+    .navbar:hover .link-text {
+        display: inline;
+    }
+
+    .navbar:hover .logo-text {
+        left:  0;
+    }
+
+
+
+}
+
