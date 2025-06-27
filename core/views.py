@@ -59,4 +59,8 @@ def registerpage(request):
 
 def logoutpage(request):
     logout(request)
-    return redirect('home')     
+    return redirect('home')
+
+
+def profile(request):
+    return render(request, 'core/profile.html')     
