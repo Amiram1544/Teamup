@@ -1,7 +1,20 @@
 {% extends 'navbar.html' %}
 {% block content %}
     {% if user.is_authenticated %}
-        <h2>Logged in</h2>
+        <div class="chat-container">
+            <div class="topics-container">
+                <h1>Topics</h1>
+                <br>
+                <hr>
+                <div class="topics-content">
+                    {% for topic in topics %}
+                        <ul>
+                            <span>{{ topic.name }}</span>
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     {% else %}
     <p>log in</p>
     {% endif %}

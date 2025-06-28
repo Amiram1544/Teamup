@@ -4,12 +4,19 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from core.forms import UserForm
+from core.models import Topics
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'core/index.html')
+    
+    topics = Topics.objects.all()
+    
+    context = {
+        'topics' : topics,
+    }
+    return render(request, 'core/index.html', context)
 
 def loginpage(request):
     
