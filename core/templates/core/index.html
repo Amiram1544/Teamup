@@ -1,5 +1,12 @@
 {% extends 'navbar.html' %}
 {% block content %}
+    <style>
+        .chat-container{
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+        }
+    </style>
+
     {% if user.is_authenticated %}
         <div class="chat-container">
             <div class="topics-container">
@@ -9,8 +16,23 @@
                 <div class="topics-content">
                     {% for topic in topics %}
                         <ul>
-                            <span>{{ topic.name }}</span>
+                            <li>
+                                <a class="topic-name" href="#" style="text-decoration: none;">{{ topic.name }}</a>
+                            </li>
                         </ul>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <h1>Your Chats</h1>
+                <br>
+                <hr>
+                <div class="rooms-container">
+                    {% for room in rooms %}
+                    <ul>
+                        <li><a href="#" style="text-decoration: none;">{{room.name}}</a></li>
+                    </ul>
                     {% endfor %}
                 </div>
             </div>
