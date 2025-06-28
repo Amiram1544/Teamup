@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from core.forms import UserForm
 
 # Create your views here.
 
@@ -39,15 +40,20 @@ def registerpage(request):
         return redirect('home')
     
     page = 'register'
-    form = UserCreationForm()
+    form = UserForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
+            user.set_password(form.cleaned_data['password1'])
             user.save()
-            login(request, user)
-            return redirect('home')
+            
+            authenticated_user = authenticate(request, username= user.username, password= form.cleaned_data['password1'])
+            
+            if authenticated_user is not None:        
+                login(request, authenticated_user)
+                return redirect('home')
         else:
             messages.error(request, 'Error during registration, please try again')
     
