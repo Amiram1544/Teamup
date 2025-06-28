@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -61,6 +62,41 @@ def logoutpage(request):
     logout(request)
     return redirect('home')
 
-
 def profile(request):
-    return render(request, 'core/profile.html')     
+    
+    if request.user.is_authenticated:
+        context = {
+            'user': request.user
+        }
+    else:
+        messages.warning(request, "Please Login to view your profile first.")
+        return redirect('login')
+    
+    return render(request, 'core/profile.html', context)     
+
+@login_required(login_url='login')
+def edit_profile(request):
+
+    user = request.user
+    form = UserCreationForm(request.POST)
+    
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated succesfully')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Error updating your profile, please try again')
+    
+    if not request.user.is_authenticated:
+        messages.warning(request, 'Please Login first to edit your profile')
+        return redirect('login')
+    
+    context = {
+        'form': form,
+    }
+    
+    return render(request, 'core/edit_profile.html', context)
+    
+    
