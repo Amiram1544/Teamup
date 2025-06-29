@@ -8,8 +8,8 @@ from django.contrib import messages
 @login_required(login_url='login')
 def room(request,pk):
     
-    rooms = Rooms.objects.all(id=pk)
-    participants = rooms.objects.all()
+    rooms = Rooms.objects.get(id=pk)
+    participants = rooms.participants.all()
     
     if not room:
         messages.warning(request, 'Room not found')
