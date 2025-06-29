@@ -6,8 +6,27 @@
             <h1>Room: {{ rooms.name }}</h1>
             <span class="room-desc">{{ rooms.description }}</span>
         </div>
+
         <div class="room-chats">
-            
+            {% for comment in comments %}
+                <div class="comment-box">
+                    <a href="#">{{ comment.user }}</a>
+                    <span>{{ comment.body }}</span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="comment-section">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% if comments %}
+                    <textarea name="comment-section" id="comment-section" placeholder="What are you up to?.... "></textarea>
+                {% else %}
+                    <textarea name="comment-section" id="comment-section" placeholder="Be the first one ... "></textarea>
+                {% endif %}
+                <button type="submit">Send</button>
+            </form>
+
         </div>
     </div>
 {% endblock content %}
