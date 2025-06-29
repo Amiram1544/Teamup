@@ -4,7 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from core.forms import UserForm
-from core.models import Topics
+from core.models import Topics, Rooms
+from django.db.models import Q
 
 # Create your views here.
 
@@ -13,8 +14,15 @@ def home(request):
     
     topics = Topics.objects.all()
     
+    q = request.GET.get('q', '')
+    rooms = Rooms.objects.filter(Q(topics__name__icontains=q)
+                                 | Q(name__icontains=q)
+                                 | Q(description__icontains=q)
+                                 ).order_by('-updated')
+    
     context = {
         'topics' : topics,
+        'rooms' : rooms,
     }
     return render(request, 'core/index.html', context)
 

@@ -17,7 +17,7 @@
                     {% for topic in topics %}
                         <ul>
                             <li>
-                                <a class="topic-name" href="#" style="text-decoration: none;">{{ topic.name }}</a>
+                                <a class="topic-name" href="{% url 'home' %}?q={{topic.name}}" style="text-decoration: none;">{{ topic.name }}</a>
                             </li>
                         </ul>
                     {% endfor %}
@@ -32,6 +32,7 @@
                     {% for room in rooms %}
                     <ul>
                         <li><a href="#" style="text-decoration: none;">{{room.name}}</a></li>
+                        <small>{{room.description|truncatechars:10}}</small>
                     </ul>
                     {% endfor %}
                 </div>
