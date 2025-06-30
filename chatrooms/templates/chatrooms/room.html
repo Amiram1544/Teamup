@@ -7,7 +7,7 @@
             <h1>Room: {{ rooms.name }}</h1>
             <span class="room-desc">{{ rooms.description }}</span>
         </div>
-
+        
         <div class="room-chats">
             {% for comment in comments %}
                 {% if comment.parent %}
@@ -24,6 +24,7 @@
             {% endfor %}
         </div>
 
+        <!-- Comment section -->
         <div class="comment-section">
             <form action="" method="post">
                 {% csrf_token %}
@@ -44,11 +45,32 @@
         </div>
     </div>
 
+    <!-- Info Page when clicked on room name -->
     <div class="room-info">
         <div class="room-info-header">
-
+            <h1>{{ rooms.name }}</h1>
+            <h4 style="color: #979797;">{{ rooms.description }}</h4>
+            <small style="color:rgb(185, 185, 185);">Created: {{ rooms.created }}</small>
         </div>
 
+        <div class="room-info-participants">
+            <h2>Participants: <strong>{{ participants.count }} users</strong></h2>
+            
+            {% for participant in participants %}
+                <div class="participants-contianer">
+                    <ul class="participants-list">
+                        <a href="#" style="text-decoration: none; color: black;">
+                            <li>
+                                {{ participant }}
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+                
+            {% endfor %}
+
+            <!-- Don't forget the Front-end of this part (Vital)-->
+        </div>
     </div>
 
 
