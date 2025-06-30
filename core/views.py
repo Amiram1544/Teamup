@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from core.forms import UserForm
 from core.models import Topics, Rooms
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -87,14 +88,30 @@ def profile(request):
     
     if request.user.is_authenticated:
         context = {
-            'user': request.user
+            'user': request.user,
+            'is_own_profile': True,
         }
     else:
         messages.warning(request, "Please Login to view your profile first.")
         return redirect('login')
     
-    return render(request, 'core/profile.html', context)     
+    return render(request, 'core/profile.html', context)
 
+def other_profile(request, username):
+    
+    user_profile = get_object_or_404(User, username=username)
+    
+    if request.user.is_authenticated:
+        context = {
+            'user': user_profile,
+            'is_own_profile': request.user == user_profile,
+        }
+    else:
+        messages.warning(request, "Please Login to view your profile first.")
+        return redirect('login')
+    
+    return render(request, 'core/profile.html', context)
+   
 @login_required(login_url='login')
 def edit_profile(request):
 

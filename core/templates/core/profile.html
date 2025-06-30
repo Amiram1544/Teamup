@@ -8,17 +8,27 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        <div class="profile-container">
-            <div class="profile-content">
-                <h1>Welcome {{user.username}}</h1>
-                <p>Email: {{user.email}}</p>
-                <p>Date Joined: {{user.date_joined|date:"F j, Y, g:i a"}}</p>
-                <div class="profile-actions">
-                    <a href="{% url 'edit_profile' %}" class="buttons edit-btn">Edit Profile</a>
-                    <a href="{% url 'logout' %}" class="buttons logout-btn">Logout</a>
+        {% if is_own_profile == True %}
+            <div class="profile-container">
+                <div class="profile-content">
+                    <h1>Welcome {{user.username}}</h1>
+                    <p>Email: {{user.email}}</p>
+                    <p>Date Joined: {{user.date_joined|date:"F j, Y, g:i a"}}</p>
+                    <div class="profile-actions">
+                        <a href="{% url 'edit_profile' %}" class="buttons edit-btn">Edit Profile</a>
+                        <a href="{% url 'logout' %}" class="buttons logout-btn">Logout</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <div class="profile-container">
+                <div class="profile-content">
+                    <h1>{{user.username}}</h1>
+                    <p>Email: {{user.email}}</p>
+                    <p>Date Joined: {{user.date_joined|date:"F j, Y, g:i a"}}</p>
+                </div>
+            </div>
+        {% endif %}
     {% endif %}
         
 {% endblock content %}
