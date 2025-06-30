@@ -12,8 +12,8 @@
             {% for comment in comments %}
                 {% if comment.parent %}
                     <div class="reply-preview">
-                        <strong style="color: gray;">{{ comment.parent.user}}:</strong>
-                        <small>{{ comment.parent.body|truncatechars:35 }}</small>
+                        <strong style="color: #979797;">{{ comment.parent.user}}:</strong>
+                        <small style="color: #979797;">{{ comment.parent.body|truncatechars:35 }}</small>
                     </div>
                 {% endif %}
                 <div class="comment-box">
@@ -31,8 +31,8 @@
                 {% if comments %}
                     <input type="hidden" name="parent_id" id="parent_id">
                     <div id="replying-to" style="display: none;">
-                        <span id="replying-user"></span>
-                        <span id="replying-preview"></span>
+                        <span id="replying-user" style="color:#4d4d4d;"></span>
+                        <span id="replying-preview" style="color: #4d4d4d;"></span>
                         <button type="button" onclick="CancleReply()">Cancle</button>
                     </div>
                     <textarea name="comment" class="comment-section" id="comment-section" placeholder="What are you up to?.... "></textarea>
