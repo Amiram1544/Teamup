@@ -1,0 +1,12 @@
+/* */
+.myteam-header {
+    display: flex;
+    align-items: center;
+
+}
+
+.myteam-profile {
+    margin-left: auto;
+    text-decoration: none;
+    color: #ef5cff;
+}

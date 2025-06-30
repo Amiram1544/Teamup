@@ -1,0 +1,22 @@
+{% extends "navbar.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'myteam/css/mainpage.css' %}">
+{% endblock extra_css %}
+
+
+{% block content %}
+
+<div class="myteam-container">
+    <div class="myteam-header">
+        <h1>My Team</h1>
+
+        <!-- Temperory Profile tag, later replace it with profile image-->
+        <!-- When it clicked like gmail some dropdown dedicated to settings -->
+        <a class="myteam-profile" href="{% url 'profile' %}">Profile</a>
+    </div>
+</div>
+
+
+{% endblock content %}
