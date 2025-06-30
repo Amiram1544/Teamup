@@ -17,6 +17,20 @@ def room(request,pk):
         messages.warning(request, 'Room not found')
         return redirect('home')
     
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            comment = request.POST.get('comment', '').strip()
+            if comment:
+                Messages.objects.create(
+                    user = request.user,
+                    rooms = rooms,
+                    body = comment,
+                )
+                rooms.participants.add(request.user)
+                messages.success(request, 'Message sent succesfully.')
+            else:
+                messages.error(request, 'Message cannot be empty.')
+            
     
     context = {
         'rooms': rooms,

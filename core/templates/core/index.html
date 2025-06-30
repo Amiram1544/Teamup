@@ -31,7 +31,7 @@
                 <div class="rooms-container">
                     {% for room in rooms %}
                     <ul>
-                        <li><a href="#" style="text-decoration: none;">{{room.name}}</a></li>
+                        <li><a href="{% url 'chatrooms:room' room.id %}" style="text-decoration: none;">{{room.name}}</a></li>
                         <small>{{room.description|truncatechars:10}}</small>
                     </ul>
                     {% endfor %}
