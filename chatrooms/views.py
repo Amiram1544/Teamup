@@ -11,7 +11,7 @@ def room(request,pk):
     
     rooms = Rooms.objects.get(id=pk)
     participants = rooms.participants.all()
-    comments = Messages.objects.filter(rooms=rooms).order_by('-created')
+    comments = Messages.objects.filter(rooms=rooms).order_by('created')
     parent_id = request.POST.get('parent_id')
     
     if not room:
