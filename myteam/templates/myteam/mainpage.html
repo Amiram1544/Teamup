@@ -32,7 +32,7 @@
             <div class="myteam-teams"> 
                 <ul>
                     <li>
-                        <a href="" style="text-decoration: none;">
+                        <a href="{% url 'myteam:team_chat' team.id %}" style="text-decoration: none;">
                             <span>{{team.name}}</span>
                             <small style="color: #de42ff;">
                                 members:

@@ -21,8 +21,10 @@ def mainpage(request):
 def team_chat(request, team_id):
     
     team_page = Teams.objects.get(id=team_id)
+    team_messages = TeamMessages.objects.filter(team=team_page).order_by('created')
     
     context = {
         'team_page': team_page,
+        'team_messages': team_messages,
     }
     return render(request, 'myteam/team_chat.html', context)

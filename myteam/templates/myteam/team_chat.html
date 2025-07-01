@@ -1,5 +1,5 @@
 {% extends 'navbar.html' %}
-
+{% load static %}
 
 {% block content %}
     <div class="team_chat-container">
@@ -7,8 +7,55 @@
             <h1>{{ team_page.name }}</h1>
             <small style="color: #bfbfbf; font-weight: bold;">{{ team_page.description }}</small>
         </div>
+
+        <div class="team_chat-content">
+        <!--<div class="team_chat-task">
+                Will be programmed later after the task app.
+            </div>-->
+
+            <div class="team_chat-messages" style="padding: 2px 5px;">
+                {% for team_message in team_messages %}
+                <!-- Check if there is any messages that been replied, header of message that shows replie-->
+                    {% if team_message.parent %}
+                        <div class="reply-preview">
+                            <strong style="color: #979797;">{{ team_message.parent.user }}:</strong>
+                            <small style="color: #979797;">{{ team_message.parent.body|truncatechars:35 }}</small>
+                        </div>
+                    {% endif %}
+                    <!-- Display of messages and Reply butoon-->
+                        <div class="team_chat-message" style="padding: 2px">
+                            <div class="team_chat-message-header">
+                                <a href="#" style="text-decoration: none ;"><strong>{{team_message.user}}</strong></a>
+                                <button type="button" onclick="ReplyTo({{ team_message.id }}, '{{ team_message.user }}', '{{ team_message.body|escapejs }}')">Reply</button>
+                            </div>
+                            <div class="team_chat-message-body">
+                                <p style="margin: 0px;">{{team_message.body}}</p>
+                                <small>{{team_message.created|date:"f A"}}</small>
+                            </div>
+                        </div>
+                {%empty%}
+                    <div class="team_chat-message" style="padding: 2px">
+                        <p>No messages yet. Be the first to send a message!</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="team_chat-input">
+            <form action="" method="post">
+                {% csrf_token %}
+                <!-- Reply preview in input -->
+                <input type="hidden" name="parent_id" id="parent_id">
+                <div class="reply-to" id="reply-to" style="display: none;">
+                    <span id="replying-user" style="color: #4d4d4d;"></span>
+                    <span id="replying-preview" style="color: #4d4d4d;"></span>
+                    <button type="button" onclick="CancleReply()">Cancle</button>
+                </div>
+                <textarea name="text_input" id="text_input" placeholder="Message your team"></textarea>
+                <button type="submit" name="text_send">Send</button>
+            </form>
+        </div>
     </div>
     
 
-
+    <script src="{% static 'myteam/js/team_chat.js' %}"></script>
 {% endblock content %}
