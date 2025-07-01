@@ -18,3 +18,19 @@ class Teams(models.Model):
     
     def __str__(self):
         return self.name
+    
+class TeamMessages(models.Model):
+    
+    team = models.ForeignKey(Teams, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    body = models.TextField()
+    parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.SET_NULL)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name_plural = 'Team_Messages'
+        ordering = ['-created']
+        
+    def __str__(self):
+        return self.body[0:50]
