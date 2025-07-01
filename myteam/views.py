@@ -16,3 +16,13 @@ def mainpage(request):
         'teams': teams,
     }
     return render(request, 'myteam/mainpage.html', context)
+
+@login_required(login_url='login')
+def team_chat(request, team_id):
+    
+    team_page = Teams.objects.get(id=team_id)
+    
+    context = {
+        'team_page': team_page,
+    }
+    return render(request, 'myteam/team_chat.html', context)
