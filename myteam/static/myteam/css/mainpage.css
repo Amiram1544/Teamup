@@ -10,3 +10,14 @@
     text-decoration: none;
     color: #ef5cff;
 }
+
+.myteam-badges {
+    display: flex;
+    align-items: baseline;
+}
+
+.myteam-button {
+    padding: 10px 20px;
+    
+    
+}
