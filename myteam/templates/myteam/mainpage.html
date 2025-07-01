@@ -27,17 +27,26 @@
     <hr>
 
     <div class="myteam-content">
-        <div class="myteam-teams">
-            <h2>Teams</h2>
-            <ul>
-                <li>
-                    <a href="#">
-                        <span>Team 1</span>
-                    </a>
-                </li>
-            </ul>
-
-        </div>
+        <h2>Teams</h2>
+        {% for team in teams %}
+            <div class="myteam-teams">
+                
+                <ul>
+                    <li>
+                        <a href="" style="text-decoration: none;">
+                            <span>{{team.name}}</span>
+                            <small style="color: #de42ff;">
+                                members:
+                                {% for member in team.first_members %}
+                                    {{ member.username }}{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                                {% if team.other_members_count > 3 %} +{{ team.other_members_count }}{% endif %}
+                            </small>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {% endfor %}
     </div>
 </div>
 
