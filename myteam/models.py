@@ -6,7 +6,7 @@ from django.conf import settings
 
 class Teams(models.Model):
     
-    #host = 
+    host = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1, related_name='team_host')
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='team_members')
