@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 
@@ -18,7 +19,7 @@ class Rooms(models.Model):
     topics = models.ForeignKey(Topics, verbose_name=("topic"), on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
-    participants = models.ManyToManyField(User, blank=True, related_name='participants')
+    participants = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='participants')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
