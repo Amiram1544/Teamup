@@ -34,3 +34,22 @@ class TeamMessages(models.Model):
         
     def __str__(self):
         return self.body[0:50]
+    
+class Tasks(models.Model):
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    topic = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    completed = models.BooleanField(default=False)
+    
+    class Meta:
+        verbose_name_plural = 'Tasks'
+        ordering = ['-created']
+        
+    def __str__(self):
+        return self.topic
+    
+    

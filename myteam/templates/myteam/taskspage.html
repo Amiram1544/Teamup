@@ -1,0 +1,26 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+    <a href="{% url 'myteam:mainpage' %}" style="text-decoration: none; color: #e04dff; font-size: 2rem;">&#8617;</a>
+
+    <div class="taskspage-container">
+        
+        <div class="taskspage-header">
+            <h1>{{ request.user }} Tasks. </h1>
+            <br>
+            <a href="#" onclick="ShowTab('todo')" style="text-decoration: none; color: black; margin-right: 5px;">To-do</a>
+            <a href="#" onclick="ShowTab('TeamTasks')" style="text-decoration: none; color: black; margin-right: 5px;">Team-Tasks</a>
+            <a href="#" onclick="ShowTab('unknown')" style="text-decoration: none; color: black; margin-right: 5px;">???</a>
+            <hr>
+        </div>
+        <div class="taskspage-content">
+            <div class="to-do">
+
+
+            </div>
+
+        </div>
+        
+    </div>
+
+{% endblock content %}

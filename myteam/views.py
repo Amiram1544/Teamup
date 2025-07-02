@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Teams, TeamMessages
+from .models import Teams, TeamMessages, Tasks
 from django.contrib import messages
 
 # Create your views here.
@@ -56,3 +56,15 @@ def team_chat(request, team_id):
         'team_members': team_members,
     }
     return render(request, 'myteam/team_chat.html', context)
+
+@login_required(login_url='login')
+def taskspage(request):
+    
+    tasks = Tasks.objects.filter(user=request.user).order_by('-created')
+    
+
+    
+    context = {
+        'tasks': tasks,
+    }
+    return render(request, 'myteam/taskspage.html', context)

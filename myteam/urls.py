@@ -6,6 +6,7 @@ app_name = 'myteam'
 urlpatterns = [
 
 path('', views.mainpage, name='mainpage'),
-path('teampage/<int:team_id>/', views.team_chat, name='team_chat')
+path('teampage/<int:team_id>/', views.team_chat, name='team_chat'),
+path("tasks/", views.taskspage , name="taskspage")
 
 ]
