@@ -1,4 +1,10 @@
 {% extends "navbar.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'myteam/css/taskpage.css' %}">
+{% endblock extra_css %}
+
+
 
 {% block content %}
     <a href="{% url 'myteam:mainpage' %}" style="text-decoration: none; color: #e04dff; font-size: 2rem;">&#8617;</a>
@@ -8,19 +14,34 @@
         <div class="taskspage-header">
             <h1>{{ request.user }} Tasks. </h1>
             <br>
-            <a href="#" onclick="ShowTab('todo')" style="text-decoration: none; color: black; margin-right: 5px;">To-do</a>
-            <a href="#" onclick="ShowTab('TeamTasks')" style="text-decoration: none; color: black; margin-right: 5px;">Team-Tasks</a>
-            <a href="#" onclick="ShowTab('unknown')" style="text-decoration: none; color: black; margin-right: 5px;">???</a>
+            <a href="#" onclick="ShowTab('todo')" style="text-decoration: none; color: black; margin-right: 15px;">To-do📃</a>
+            <a href="#" onclick="ShowTab('TeamTasks')" style="text-decoration: none; color: black; margin-right: 15px;">Team-Tasks🫱🏻‍🫲🏼</a>
+            <a href="#" onclick="ShowTab('unknown')" style="text-decoration: none; color: black; margin-right: 15px;">???</a>
             <hr>
         </div>
         <div class="taskspage-content">
-            <div class="to-do">
-
-
+            <div class="to-do" id="todo">
+                <div class="to-do-header">
+                    <h4>{{today|date:'D, M j, Y' }}</h4>
+                </div>
+                {% for task in tasks %}
+                    <div class="todo-items">
+                        {% if task %}
+                        <ul>
+                           <li><span>{{ task.topic }}</span></li>
+                            <span class="task-description">{{ task.description }}</span>
+                            <span class="task-notes">{{ task.notes }}</span>
+                        </ul>
+                        {% else %}
+                            <p>Failing to plan is planning to fail.</p>
+                        {% endif %}
+                {% endfor %}
             </div>
 
         </div>
         
     </div>
 
+
+    <script src="{% static 'myteam/js/taskpage.js' %}"></script>
 {% endblock content %}

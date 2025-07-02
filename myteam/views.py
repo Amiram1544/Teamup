@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Teams, TeamMessages, Tasks
+from .models import Teams, TeamMessages, ToDo
 from django.contrib import messages
+from django.utils.timezone import now
 
 # Create your views here.
 
@@ -60,11 +61,13 @@ def team_chat(request, team_id):
 @login_required(login_url='login')
 def taskspage(request):
     
-    tasks = Tasks.objects.filter(user=request.user).order_by('-created')
+    tasks = ToDo.objects.filter(user=request.user).order_by('-created')
+    today = now().date()
     
 
     
     context = {
         'tasks': tasks,
+        'today': today,
     }
     return render(request, 'myteam/taskspage.html', context)

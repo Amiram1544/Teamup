@@ -35,7 +35,7 @@ class TeamMessages(models.Model):
     def __str__(self):
         return self.body[0:50]
     
-class Tasks(models.Model):
+class ToDo(models.Model):
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     topic = models.CharField(max_length=100)
