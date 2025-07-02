@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="{% static 'myteam/css/taskpage.css' %}">
 {% endblock extra_css %}
 
+<!-- Had to learn the AJAX a little
+-->
 
 
 {% block content %}
@@ -23,6 +25,28 @@
             <div class="to-do" id="todo">
                 <div class="to-do-header">
                     <h4>{{today|date:'D, M j, Y' }}</h4>
+                </div>
+                <div class="to-do-workspace">
+                   <!-- Topic input --> 
+                   <div class="task-input">
+                        <textarea name="task-topic" id="task-topic" placeholder="Add a new task ..."></textarea>
+                        <button onclick="openTaskModal()">➕</button>
+                   </div>
+                   <!-- Task modal -->
+                   <div id="task-modal" class="task-modal" style="display: none;">
+                        <div class="task-modal-content">
+                            <h3>Add Task details</h3>
+                            <label for="task-description">Description:</label>
+                            <textarea name="task-description" id="task-description" placeholder="Enter description..."></textarea>
+
+                            <label for="task-notes">Notes:</label>
+                            <textarea name="task-notes" id="task-notes" placeholder="Notes..."></textarea>
+                            <div class="task-modal-button">
+                                <button onclick="closeTaskModal()">Cancle</button>
+                                <button onclick="submitTask()">Submit</button>
+                            </div>
+                        </div>
+                   </div>
                 </div>
                 {% for task in tasks %}
                     <div class="todo-items">

@@ -65,7 +65,6 @@ def taskspage(request):
     today = now().date()
     
 
-    
     context = {
         'tasks': tasks,
         'today': today,
