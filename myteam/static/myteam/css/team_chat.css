@@ -1,0 +1,45 @@
+/* User messages */
+.my-message {
+    
+    color: rgb(203, 173, 230);
+}
+
+/* Other user messages */
+.other-message {
+
+    background-color: lightgray;
+}
+
+.team_chat-message {
+
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    margin: 5px 0;
+    padding: 10px;
+}
+
+.reply-preview {
+
+    width:fit-content;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.message-wrapper {
+
+    display: flex;
+    width: 100%;
+}
+
+.message-wrapper.right {
+
+    justify-content: flex-end;
+}
+
+.message-wrapper.left {
+
+    justify-content: flex-start;
+}
