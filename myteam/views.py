@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Teams, TeamMessages, ToDo
 from django.contrib import messages
 from django.utils.timezone import now
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt #only for development
+import json
+
 
 # Create your views here.
 
@@ -70,3 +74,32 @@ def taskspage(request):
         'today': today,
     }
     return render(request, 'myteam/taskspage.html', context)
+
+@csrf_exempt #development only, not for deployment
+def add_task_ajax(request):
+    
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        
+        topic = data.get('topic')
+        description = data.get('description')
+        notes = data.get('notes')
+        
+        task = ToDo.objects.create(
+            user = request.user,
+            topic = topic,
+            description = description,
+            notes = notes,
+        )
+        
+        return JsonResponse({
+            'success' : True,
+            'task' : {
+                'id' : task.id,
+                'topic': task.topic,
+                'description' : task.description,
+                'notes' : task.notes,   
+            }
+        })
+        
+    return JsonResponse ({'success': False}, status=400)

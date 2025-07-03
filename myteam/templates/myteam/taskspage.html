@@ -4,11 +4,15 @@
     <link rel="stylesheet" href="{% static 'myteam/css/taskpage.css' %}">
 {% endblock extra_css %}
 
-<!-- Had to learn the AJAX a little
+<!-- 1- Had to learn the AJAX a little for it,
+     2- Make notes drop down,
+     3- 
 -->
 
 
 {% block content %}
+    {% csrf_token %}
+
     <a href="{% url 'myteam:mainpage' %}" style="text-decoration: none; color: #e04dff; font-size: 2rem;">&#8617;</a>
 
     <div class="taskspage-container">
