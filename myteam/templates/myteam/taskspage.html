@@ -57,8 +57,8 @@
                         {% if task %}
                         <ul>
                            <li><span>{{ task.topic }}</span>
-                           <button type="button" onclick="doneButton()" class="button done-button">✅</button>
-                           <button type="button" onclick="deleteButton()" class=" button delete-button">🗑️</button></li>
+                           <button type="button" onclick="doneButton(this)" class="button done-button" id="done-btn">✅</button>
+                           <button type="button" onclick="deleteButton(this)" class=" button delete-button" id="delete-btn">🗑️</button></li>
                             <span class="task-description">{{ task.description }}</span>
                             <span class="task-notes">{{ task.notes }}</span>
                         </ul>

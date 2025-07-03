@@ -96,3 +96,12 @@ function addTaskToPage(task) {
     `;
     container.appendChild(taskElement);
 }
+
+//make this right the guide is in AI
+//read the explainment of AJAX and ... 
+function doneButton(this) {
+    
+    document.getElementById("mytopic").style.textDecoration = "line-through";
+    document.getElementById("mydesc").style.textDecoration = "line-through";
+    document.getElementById("mynotes").style.textDecoration = "line-through";
+}
