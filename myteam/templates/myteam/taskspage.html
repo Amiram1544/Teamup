@@ -56,7 +56,9 @@
                     <div class="todo-items">
                         {% if task %}
                         <ul>
-                           <li><span>{{ task.topic }}</span></li>
+                           <li><span>{{ task.topic }}</span>
+                           <button type="button" onclick="doneButton()" class="button done-button">✅</button>
+                           <button type="button" onclick="deleteButton()" class=" button delete-button">🗑️</button></li>
                             <span class="task-description">{{ task.description }}</span>
                             <span class="task-notes">{{ task.notes }}</span>
                         </ul>

@@ -14,3 +14,13 @@
     flex-direction: flex-end;
      
 }
+
+.button {
+    display: inline-block;
+    cursor: pointer;
+
+}
+
+.button.done-button {
+    margin-left: 15px;
+}
