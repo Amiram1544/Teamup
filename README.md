@@ -1,4 +1,3 @@
-Here is your ready-to-use **README.md** content for your TeamUp project. You can copy-paste it directly into a `README.md` file and upload it to your GitHub repo:
 
 ````markdown
 # TeamUp
