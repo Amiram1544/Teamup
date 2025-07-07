@@ -56,10 +56,12 @@ class TeamTasks(models.Model):
     
     team = models.ForeignKey(Teams, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    assinged_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="assigned_tasks", blank=True)
     topic = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    deadline = models.DateTimeField(null=True, blank=True)
     completed = models.BooleanField(default=False)
     
     class Meta:
