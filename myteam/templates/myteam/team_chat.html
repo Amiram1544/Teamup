@@ -30,41 +30,47 @@
 
             <div class="team_chat-messages" style="padding: 2px 5px;">
                 {% for team_message in team_messages %}
-                <!-- Check if there is any messages that been replied, header of message that shows replie-->
-                    {% if team_message.parent %}
-                        <div class="reply-preview">
-                            <strong style="color: #979797;">{{ team_message.parent.user }}:</strong>
-                            <small style="color: #979797;">{{ team_message.parent.body|truncatechars:35 }}</small>
+                    {% if team_message.user == request.user %}
+                        <div class="message-wrapper right">
+                                <!-- Display of messages and Reply butoon-->
+                                <div class="team_chat-message my-message">
+                                <!-- Check if there is any messages that been replied, header of message that shows replie-->
+                                    {% if team_message.parent %}
+                                        <div class="reply-preview right-reply">
+                                            <strong style="color: #979797;">{{ team_message.parent.user }}:</strong>
+                                            <small style="color: #979797;">{{ team_message.parent.body|truncatechars:35 }}</small>
+                                        </div>
+                                    {% endif %}
+                                    <div class="team_chat-message-header">
+                                        <a href="#" style="text-decoration: none ;"><strong>{{team_message.user}}</strong></a>
+                                        <button type="button" onclick="ReplyTo({{ team_message.id }}, '{{ team_message.user }}', '{{ team_message.body|escapejs }}')">Reply</button>
+                                    </div>
+                                    <div class="team_chat-message-body">
+                                        <p style="margin: 0px;">{{team_message.body}}</p>
+                                        <div class="message-time"><small>{{team_message.created|date:"f A"}}</small></div>
+                                    </div>
+                                </div>
+                            </div>
+                    {% else %}
+                        <div class="message-wrapper left">
+                            <div class="team_chat-message other-message">
+                                {% if team_message.parent %}
+                                    <div class="reply-preview">
+                                        <strong style="color: #979797;">{{ team_message.parent.user }}:</strong>
+                                        <small style="color: #979797;">{{ team_message.parent.body|truncatechars:35 }}</small>
+                                    </div>
+                                {% endif %}
+                                <div class="team_chat-message-header">
+                                    <a href="#" style="text-decoration: none ;"><strong>{{team_message.user}}</strong></a>
+                                    <button type="button" onclick="ReplyTo({{ team_message.id }}, '{{ team_message.user }}', '{{ team_message.body|escapejs }}')">Reply</button>
+                                </div>
+                                <div class="team_chat-message-body">
+                                    <p style="margin: 0px;">{{team_message.body}}</p>
+                                    <div class="message-time"><small>{{team_message.created|date:"f A"}}</small></div>
+                                </div>
+                            </div>
                         </div>
                     {% endif %}
-                    <!-- Display of messages and Reply butoon-->
-                    {% if team_message.user == request.user %}
-                            <div class="message-wrapper right">
-                                <div class="team_chat-message my-message">
-                                    <div class="team_chat-message-header">
-                                        <a href="#" style="text-decoration: none ;"><strong>{{team_message.user}}</strong></a>
-                                        <button type="button" onclick="ReplyTo({{ team_message.id }}, '{{ team_message.user }}', '{{ team_message.body|escapejs }}')">Reply</button>
-                                    </div>
-                                    <div class="team_chat-message-body">
-                                        <p style="margin: 0px;">{{team_message.body}}</p>
-                                        <small>{{team_message.created|date:"f A"}}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        {% else %}
-                            <div class="message-wrapper left">
-                                <div class="team_chat-message other-message">
-                                    <div class="team_chat-message-header">
-                                        <a href="#" style="text-decoration: none ;"><strong>{{team_message.user}}</strong></a>
-                                        <button type="button" onclick="ReplyTo({{ team_message.id }}, '{{ team_message.user }}', '{{ team_message.body|escapejs }}')">Reply</button>
-                                    </div>
-                                    <div class="team_chat-message-body">
-                                        <p style="margin: 0px;">{{team_message.body}}</p>
-                                        <small>{{team_message.created|date:"f A"}}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
                 {%empty%}
                     <div class="team_chat-message" style="padding: 2px">
                         <p>No messages yet. Be the first to send a message!</p>

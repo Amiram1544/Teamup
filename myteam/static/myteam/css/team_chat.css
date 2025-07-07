@@ -35,7 +35,7 @@
 /* Other user messages */
 .other-message {
 
-    background-color: lightgray;
+    color: rgb(71, 71, 71);
 }
 
 /* Reply box */
@@ -48,3 +48,21 @@
     border-radius: 5px;
 }
 
+.reply-preview.right-reply {
+    
+    display: flex;
+    align-items: right;
+    margin-left: auto;
+    margin-right: 0px ;
+}
+
+.team_chat-message-header, .team_chat-message-body{
+
+    padding-left:5px ;
+}
+
+.my-message .message-time {
+
+    text-align: right;
+    padding-right: 10px;
+}
