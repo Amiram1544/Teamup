@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.utils.timezone import now
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt #only for development
+from django.views.decorators.http import require_POST
 import json
 
 
@@ -98,8 +99,41 @@ def add_task_ajax(request):
                 'id' : task.id,
                 'topic': task.topic,
                 'description' : task.description,
-                'notes' : task.notes,   
+                'notes' : task.notes,
+                'completed': task.completed,   
             }
         })
         
     return JsonResponse ({'success': False}, status=400)
+
+@csrf_exempt #for development only
+@require_POST
+def complete_task_ajax(request):
+    data = json.loads(request.body)
+    task_id = data.get('id')
+    
+    try:
+        
+        task = ToDo.objects.get(id=task_id, user=request.user)
+        task.completed = not task.completed
+        task.save()
+        return JsonResponse({'success': True, 'completed': task.completed})
+    
+    except ToDo.DoesNotExist:
+        
+        return JsonResponse({'success': False}, status=400)
+    
+    
+@csrf_exempt
+@require_POST
+def delete_task_ajax(request):
+    data = json.loads(request.body)
+    task_id = data.get('id')
+    
+    
+    try:
+        task = ToDo.objects.get(id = task_id, user = request.user)
+        task.delete()
+        return JsonResponse({'success': True})
+    except ToDo.DoesNotExist:
+        return JsonResponse({'success': False}, status = 404)

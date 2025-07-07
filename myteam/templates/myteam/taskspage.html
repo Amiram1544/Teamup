@@ -20,9 +20,9 @@
         <div class="taskspage-header">
             <h1>{{ request.user }} Tasks. </h1>
             <br>
-            <a href="#" onclick="ShowTab('todo')" style="text-decoration: none; color: black; margin-right: 15px;">To-do📃</a>
-            <a href="#" onclick="ShowTab('TeamTasks')" style="text-decoration: none; color: black; margin-right: 15px;">Team-Tasks🫱🏻‍🫲🏼</a>
-            <a href="#" onclick="ShowTab('unknown')" style="text-decoration: none; color: black; margin-right: 15px;">???</a>
+            <a href="#" onclick="showTab('todo')" style="text-decoration: none; color: black; margin-right: 15px;">To-do📃</a>
+            <a href="#" onclick="showTab('TeamTasks')" style="text-decoration: none; color: black; margin-right: 15px;">Team-Tasks🫱🏻‍🫲🏼</a>
+            <a href="#" onclick="showTab('unknown')" style="text-decoration: none; color: black; margin-right: 15px;">???</a>
             <hr>
         </div>
         <div class="taskspage-content">
@@ -46,25 +46,26 @@
                             <label for="task-notes">Notes:</label>
                             <textarea name="task-notes" id="task-notes" placeholder="Notes..."></textarea>
                             <div class="task-modal-button">
-                                <button onclick="closeTaskModal()">Cancle</button>
+                                <button onclick="closeTaskModal()">Cancel</button>
                                 <button onclick="submitTask()">Submit</button>
                             </div>
                         </div>
                    </div>
                 </div>
                 {% for task in tasks %}
-                    <div class="todo-items">
+                    <div class="todo-items {% if task.completed %} completed {% endif %}" data-id="{{ task.id }}">
                         {% if task %}
                         <ul>
-                           <li><span>{{ task.topic }}</span>
-                           <button type="button" onclick="doneButton(this)" class="button done-button" id="done-btn">✅</button>
-                           <button type="button" onclick="deleteButton(this)" class=" button delete-button" id="delete-btn">🗑️</button></li>
+                           <li><span class="task-topic">{{ task.topic }}</span>
+                           <button type="button" onclick="doneButton(this)" class="button done-button">✅</button>
+                           <button type="button" onclick="deleteButton(this)" class=" button delete-button">🗑️</button></li>
                             <span class="task-description">{{ task.description }}</span>
                             <span class="task-notes">{{ task.notes }}</span>
                         </ul>
                         {% else %}
                             <p>Failing to plan is planning to fail.</p>
                         {% endif %}
+                    </div>
                 {% endfor %}
             </div>
 

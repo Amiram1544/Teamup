@@ -87,21 +87,72 @@ function addTaskToPage(task) {
 
     const taskElement = document.createElement("div");
     taskElement.classList.add("todo-items");
+    taskElement.dataset.id = task.id;
+
     taskElement.innerHTML = `
         <ul>
-            <li><span>${ task.topic }</span></li>
+            <li><span class="task-topic">${ task.topic }</span>
+            <button type="button" onclick="doneButton(this)" class="button done-button">✅</button>
+            <button type="button" onclick="deleteButton(this)" class="button delete-button">🗑️</button></li>
             <span class="task-description">${ task.description }</span>
             <span class="task-notes">${ task.notes }</span>
         </ul>
     `;
-    container.appendChild(taskElement);
+
+    if (task.completed) {
+
+        taskElement.classList.add('completed');
+    }
+
+    container.insertBefore(taskElement, container.firstChild);
 }
 
-//make this right the guide is in AI
-//read the explainment of AJAX and ... 
-function doneButton(this) {
-    
-    document.getElementById("mytopic").style.textDecoration = "line-through";
-    document.getElementById("mydesc").style.textDecoration = "line-through";
-    document.getElementById("mynotes").style.textDecoration = "line-through";
+ 
+function doneButton(button) {
+
+    const taskElement = button.closest(".todo-items");
+    const taskId = taskElement.dataset.id;
+    console.log("Toggling completed for task id:", taskElement.dataset.id);
+    taskElement.classList.toggle("completed"); // toggle CSS class for visual
+
+    fetch("/myteam/complete-task-ajax/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: JSON.stringify({ id: taskId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            alert("Failed to update task status.");
+            // revert toggle?
+            taskElement.classList.toggle("completed");
+        }
+    });
+}
+
+function deleteButton(button){
+
+    const taskElement = button.closest(".todo-items")
+    console.log("Deleting task element:", taskElement);
+    const taskId =taskElement.dataset.id;
+
+    fetch("/myteam/delete-task-ajax/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie("csrftoken")
+        },
+        body: JSON.stringify({ id: taskId })
+    })
+    .then (response => response.json())
+    .then (data =>{
+        if (data.success){
+            taskElement.remove();
+        } else {
+            alert("Failed to delete")
+        }
+    });
 }
