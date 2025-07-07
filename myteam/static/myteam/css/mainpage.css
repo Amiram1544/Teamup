@@ -21,3 +21,15 @@
     
     
 }
+
+.header-icons {
+    margin-left: auto;
+    padding: 10px;
+}
+
+.myteam-news {
+    margin-left: auto;
+    padding-right:10px ;
+    text-decoration: none;
+    color: #ef5cff;
+}
