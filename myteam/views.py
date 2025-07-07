@@ -137,3 +137,9 @@ def delete_task_ajax(request):
         return JsonResponse({'success': True})
     except ToDo.DoesNotExist:
         return JsonResponse({'success': False}, status = 404)
+    
+    
+    
+    
+def news(request):
+    return render(request, 'myteam/news.html')
