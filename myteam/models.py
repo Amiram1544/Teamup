@@ -54,6 +54,7 @@ class ToDo(models.Model):
     
 class TeamTasks(models.Model):
     
+    team = models.ForeignKey(Teams, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     topic = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
