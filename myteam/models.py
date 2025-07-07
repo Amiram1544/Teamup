@@ -52,4 +52,18 @@ class ToDo(models.Model):
     def __str__(self):
         return self.topic
     
+class TeamTasks(models.Model):
     
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    topic = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    completed = models.BooleanField(default=False)
+    
+    class Meta:
+        verbose_name_plural = 'Team Tasks'
+        ordering = ['-created']
+        
+    def __str__(self):
+        return self.topic[0:50]
