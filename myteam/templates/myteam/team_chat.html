@@ -20,9 +20,7 @@
         <div class="team_chat-header" style="align-items: center; margin-bottom: 5px;">
             <h1>{{ team_page.name }}</h1>
             <!-- Team Task modal-->
-            {% for task in team_tasks %}
-                <button onclick="openTaskPopup({{ task.id }})">📃</button>
-            {% endfor %}
+            <button onclick="openTaskPopup({{ team_page.id }})">📃</button>
             <div id="team-task-modal" class="modal" style="display: none;">
                 <div class="team-task-container" id="team-task-container"></div>
             </div>

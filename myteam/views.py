@@ -148,11 +148,12 @@ def news(request):
     return render(request, 'myteam/news.html')
 
 
-def team_task(request, pk):
+def team_task(request, team_id):
     
-    task = get_object_or_404(TeamTasks, pk=pk)
+    team = get_object_or_404(Teams, id= team_id)
+    tasks = TeamTasks.objects.filter(team=team)
     
     context = {
-        'task': task,
+        'tasks': tasks,
     }
     return render(request, "myteam/team_task.html", context)

@@ -1,10 +1,16 @@
 <div class="team-task-container">
-
+    <button type="button" onclick="closePopup()">❌</button>
+    {% for task in tasks %}
     <div class="team-task-header">
         <h2>{{ task.topic }}</h2>
-        <span>{{ task.deadline }}</span>
-        <small>+{{ task.assigned_users.count }}</small>
-        <button type="button" onclick="closePopup()">❌</button>
+        <span style="color: red;">{{ task.deadline }}</span><br>
+        <small>+{{ task.assinged_users.count }} users assigned.</small>   
     </div>
+    <div class="team-task-dropdown" style="display: none;">
+        <p> {{ task.description }} </p>
+        <span> {{ task.created }} </span>
+        <strong>Status: {% if task.completed%} Done✔️ {% else %} Ongoing... {% endif %}</strong>
+    </div>
+    {% endfor %}
 
 </div>
