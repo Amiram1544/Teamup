@@ -87,3 +87,15 @@ class TeamTasks(models.Model):
         
     def __str__(self):
         return self.topic[0:50]
+    
+    
+class Feed(models.Model):
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=100)
+    content = models.TextField()
+    timestamp = models.DateTimeField(default=timezone.now)
+    seen = models.BooleanField(default=False)
+    
+    class Meta:
+        ordering = ['-timestamp']
