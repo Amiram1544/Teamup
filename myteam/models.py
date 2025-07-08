@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.utils import timezone
+from datetime import timedelta
 
 # Create your models here.
 
@@ -64,6 +66,21 @@ class TeamTasks(models.Model):
     deadline = models.DateTimeField(null=True, blank=True)
     completed = models.BooleanField(default=False)
     
+    def time_left(self):
+        
+        if self.deadline:
+            delta = self.deadline - timezone.now()
+            if delta.total_seconds() <= 0:
+                return 'Deadline is over'
+            else:
+                days = delta.days
+                hours = delta.seconds // 3600
+                minutes = (delta.seconds%3600) // 60
+                
+                return f'{days} days & {hours} hours {minutes} minutes.'
+            
+        return 'no deadline' 
+        
     class Meta:
         verbose_name_plural = 'Team Tasks'
         ordering = ['-created']

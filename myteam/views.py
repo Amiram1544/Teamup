@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt #only for development
 from django.views.decorators.http import require_POST
 import json
+from django.utils import timezone
 
 
 # Create your views here.
@@ -157,3 +158,13 @@ def team_task(request, team_id):
         'tasks': tasks,
     }
     return render(request, "myteam/team_task.html", context)
+
+def get_user_tasks(request):
+    
+    user = request.user
+    tasks = TeamTasks.objects.filter(assinged_users=user)
+    
+    context = {
+        'tasks': tasks,
+    }
+    return render(request, 'myteam/get_user_tasks.html', context)

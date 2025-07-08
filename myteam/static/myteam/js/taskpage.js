@@ -16,9 +16,18 @@ function showTab(tabName) {
         document.getElementById('tab-todo').classList.add("active")
     } else if (tabName== 'task') {
         document.getElementById('tab-task').classList.add("active")
+        loadTeamTask()
     } else if (tabName== 'unknown') {
         document.getElementById('tab-unknown').classList.add("active")
     }
+}
+
+function loadTeamTask() {
+    fetch(`/myteam/get-user-tasks/`)
+    .then (response => response.text())
+    .then (html => {
+        document.getElementById("team-task-container").innerHTML = html;
+    })
 }
 
 function openTaskModal() {

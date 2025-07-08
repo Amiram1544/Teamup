@@ -1,0 +1,12 @@
+{% for task in tasks %}
+    <div class="team-task-card">
+        <h3>{{ task.topic }}</h3>
+        <p>{{ task.description }}</p>
+        <small>Deadline: {{ task.deadline }} <span style="color: red; font-size: 0.6rem;">{{ task.time_left }}</span></small><br>
+        <strong>Status: {% if task.completed %}✅ Done{% else %}🕒 Ongoing{% endif %}</strong>
+        <br>
+        <hr>
+    </div>
+{% empty %}
+    <p>No team tasks assigned to you.</p>
+{% endfor %}
