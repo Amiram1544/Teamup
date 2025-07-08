@@ -1,16 +1,57 @@
 <div class="team-task-container">
     <button type="button" onclick="closePopup()">❌</button>
     {% for task in tasks %}
-    <div class="team-task-header">
-        <h2>{{ task.topic }}</h2>
-        <span style="color: red;">{{ task.deadline }}</span><br>
-        <small>+{{ task.assinged_users.count }} users assigned.</small>   
-    </div>
-    <div class="team-task-dropdown" style="display: none;">
-        <p> {{ task.description }} </p>
-        <span> {{ task.created }} </span>
-        <strong>Status: {% if task.completed%} Done✔️ {% else %} Ongoing... {% endif %}</strong>
+    <div class="task-wrapper">
+        <div class="team-task-header">
+            <h2 class="show-hover">{{ task.topic }}</h2>
+            <span style="color: red;">Due to: {{ task.deadline }}</span><br>
+            <small>+{{ task.assinged_users.count }} users assigned.</small>   
+        </div>
+        <div class="team-task-hover">
+            <span> description: {{ task.description }} </span><br>
+            <small> Created: {{ task.created }} </small><br>
+            <strong>Status: {% if task.completed%} Done✔️ {% else %} Ongoing... {% endif %}</strong>
+        </div>
     </div>
     {% endfor %}
 
 </div>
+
+<style>
+
+    .task-wrapper{
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    .team-task-hover {
+
+    display: block;
+    opacity: 0;
+    position: absolute;
+    overflow: visible;
+    top: 10%%;
+    left: 100%;
+    background-color: #dedede;
+    border: 1px solid #c1c1c1;
+    border-radius: 9px;
+    box-shadow: 0px 2px 6px rgba(222, 222, 222, 0.56);
+    padding: 10px;
+    font-size: 0.8rem;
+    color: black;
+    transition: opacity 0.5s ease-in-out;
+    }
+
+    .task-wrapper:hover .team-task-hover {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .show-hover {
+        transition: transform 0.3s ease-in;
+    }
+
+    .task-wrapper:hover .show-hover{
+        transform: scale(1.1);
+    }
+</style>
