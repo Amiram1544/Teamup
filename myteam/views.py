@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Teams, TeamMessages, ToDo, TeamTasks
+from .models import Teams, TeamMessages, ToDo, TeamTasks, Feed
 from django.contrib import messages
 from django.utils.timezone import now
 from django.http import JsonResponse
@@ -98,6 +98,15 @@ def add_task_ajax(request):
             notes = notes,
         )
         
+        task.assinged_users.add(request.user)
+        
+        for user in task.assinged_users.all():
+            Feed.objects.create(
+                user = user,
+                subject = topic,
+                content = f"new task assigned {task.topic}"
+            )
+        
         return JsonResponse({
             'success' : True,
             'task' : {
@@ -146,7 +155,12 @@ def delete_task_ajax(request):
     
 def news(request):
     
-    return render(request, 'myteam/news.html')
+    feeds = request.user.activities.all()[:20]
+    
+    context ={
+        'feeds' : feeds,
+    }
+    return render(request, 'myteam/news.html', context)
 
 
 def team_task(request, team_id):

@@ -91,7 +91,7 @@ class TeamTasks(models.Model):
     
 class Feed(models.Model):
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='activities')
     subject = models.CharField(max_length=100)
     content = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now)
@@ -99,3 +99,6 @@ class Feed(models.Model):
     
     class Meta:
         ordering = ['-timestamp']
+        
+    def __str__(self):
+        return f"{self.user.username}: {self.subject}"

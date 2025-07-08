@@ -6,9 +6,20 @@
         <div class="header">
         <h1>Activities:</h1>
         </div>
-        <div class="content">
-            
-        </div>
+
+            {% for feed in feeds %}
+                <div class="content">
+                    <ul>
+                        <li>
+                            <h6>{{ feed.content }}</h6>
+                            <small>{{ feed.timestamp|timesince}} ago</small>
+                        </li>
+                    </ul>
+                </div>
+            {% empty %}
+                <h3>Nothing new</h3>
+            {% endfor %}
+
     </div>
 
 
