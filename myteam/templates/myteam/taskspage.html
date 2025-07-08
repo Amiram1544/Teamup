@@ -20,9 +20,9 @@
         <div class="taskspage-header">
             <h1>{{ request.user }} Tasks. </h1>
             <br>
-            <a href="#" onclick="showTab('todo')" style="text-decoration: none; color: black; margin-right: 15px;">To-do📃</a>
-            <a href="#" onclick="showTab('TeamTasks')" style="text-decoration: none; color: black; margin-right: 15px;">Team-Tasks🫱🏻‍🫲🏼</a>
-            <a href="#" onclick="showTab('unknown')" style="text-decoration: none; color: black; margin-right: 15px;">???</a>
+            <button type="button" class="tab-link" id="tab-todo" onclick="showTab('todo')">To-do📃</button>
+            <button type="button" class="tab-link" id="tab-task" onclick="showTab('task')">Team-Tasks🫱🏻‍🫲🏼</button>
+            <button type="button" class="tab-link" id="tab-unknown" onclick="showTab('unknown')">???</button>
             <hr>
         </div>
         <div class="taskspage-content">
@@ -67,7 +67,24 @@
                         {% endif %}
                     </div>
                 {% endfor %}
+
             </div>
+                <!-- Team tasks -->
+            <div class="team-tasks" id="task" style="display: none;">
+                <h4>Assigned Tasks</h4>
+                <div class="team-task-container">
+
+                </div>
+            </div>
+
+            <!-- Team tasks -->
+            <div class="unknown" id="unknown" style="display: none;">
+                <h4>unknown</h4>
+                <div class="unknown-container">
+
+                </div>
+            </div>
+
 
         </div>
         

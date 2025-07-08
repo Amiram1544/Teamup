@@ -1,9 +1,25 @@
-/*function showTab(tabName) {
-    const sections = document.querySelectorAll('.tab-section');
-    sections.forEach(section => section.style.display = 'none');
+function showTab(tabName) {
 
-    document.getElementById(tabName).style.display = 'block';
-}*/
+    //First hide all
+    document.getElementById("todo").style.display = "none";
+    document.getElementById("task").style.display = "none";
+    document.getElementById("unknown").style.display = "none";
+
+    //Remove active
+    document.querySelectorAll(".tab-link").forEach(link => link.classList.remove("active"))
+
+    //Selected tab show
+    document.getElementById(tabName).style.display = "block"
+
+    //if active
+    if (tabName == 'todo') {
+        document.getElementById('tab-todo').classList.add("active")
+    } else if (tabName== 'task') {
+        document.getElementById('tab-task').classList.add("active")
+    } else if (tabName== 'unknown') {
+        document.getElementById('tab-unknown').classList.add("active")
+    }
+}
 
 function openTaskModal() {
     
