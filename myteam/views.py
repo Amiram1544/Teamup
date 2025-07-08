@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Teams, TeamMessages, ToDo
+from .models import Teams, TeamMessages, ToDo, TeamTasks
 from django.contrib import messages
 from django.utils.timezone import now
 from django.http import JsonResponse
@@ -27,10 +27,13 @@ def mainpage(request):
 @login_required(login_url='login')
 def team_chat(request, team_id):
     
+    
+    
     team_page = Teams.objects.get(id=team_id)
     team_members = team_page.members.all()
     team_messages = TeamMessages.objects.filter(team=team_page).order_by('created')
     parent_id = request.POST.get('parent_id')
+    team_tasks = TeamTasks.objects.filter(team=team_page)
     
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -60,6 +63,7 @@ def team_chat(request, team_id):
         'team_page': team_page,
         'team_messages': team_messages,
         'team_members': team_members,
+        'team_tasks': team_tasks,
     }
     return render(request, 'myteam/team_chat.html', context)
 
@@ -137,9 +141,18 @@ def delete_task_ajax(request):
         return JsonResponse({'success': True})
     except ToDo.DoesNotExist:
         return JsonResponse({'success': False}, status = 404)
-    
-    
-    
+     
     
 def news(request):
+    
     return render(request, 'myteam/news.html')
+
+
+def team_task(request, pk):
+    
+    task = get_object_or_404(TeamTasks, pk=pk)
+    
+    context = {
+        'task': task,
+    }
+    return render(request, "myteam/team_task.html", context)

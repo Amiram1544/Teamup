@@ -19,6 +19,13 @@
     <div class="team_chat-container">
         <div class="team_chat-header" style="align-items: center; margin-bottom: 5px;">
             <h1>{{ team_page.name }}</h1>
+            <!-- Team Task modal-->
+            {% for task in team_tasks %}
+                <button onclick="openTaskPopup({{ task.id }})">📃</button>
+            {% endfor %}
+            <div id="team-task-modal" class="modal" style="display: none;">
+                <div class="team-task-container" id="team-task-container"></div>
+            </div>
             <small style="color: #bfbfbf; font-weight: bold;">{{ team_page.description }}</small>
             <hr>
         </div>
@@ -96,4 +103,5 @@
     
 
     <script src="{% static 'myteam/js/team_chat.js' %}"></script>
+    <script src="{% static 'myteam/js/team_task.js' %}"></script>
 {% endblock content %}
