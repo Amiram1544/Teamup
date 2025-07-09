@@ -2,17 +2,46 @@
 
 {% block content %}
 
+<style>
+
+    .feed-content{
+        text-decoration: none;
+        transition: transform 0.4s ease-in;
+        display: inline-block;
+    }
+
+    .feed-content:hover {
+        transform: scale(1.02);
+
+        -webkit-filter: brightness(1.2) drop-shadow(6px 10px 15px 1px #ff6be4);
+        filter: brightness(1.2) drop-shadow(6px 10px 15px#ff6be4);
+
+
+    }
+
+    .feed-content a{
+        text-decoration: none;
+        color: deeppink;
+    }
+
+</style>
+
     <div class="feed-container" style="margin: 10px;">
         <div class="header">
         <h1>Activities:</h1>
         </div>
 
             {% for feed in feeds %}
-                <div class="content">
+                <div class="content" style="padding-bottom: 10px;">
                     <ul>
                         <li>
-                            <h6>{{ feed.content }}</h6>
-                            <small>{{ feed.timestamp|timesince}} ago</small>
+                            <span class="feed-content">
+                                <a class="link" href="{% url 'myteam:taskspage' %}#team-tasks">{{ feed.content }}</a>
+                                <small style="color: #6d6d6d;">{{ feed.timestamp|timesince}} ago</small>
+                            </span>
+                            <br>
+                            <br>
+                            <hr>
                         </li>
                     </ul>
                 </div>
