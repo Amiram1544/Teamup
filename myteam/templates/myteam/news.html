@@ -36,7 +36,11 @@
                     <ul>
                         <li>
                             <span class="feed-content">
-                                <a class="link" href="{% url 'myteam:taskspage' %}#team-tasks">{{ feed.content }}</a>
+                                {% if "assigned a new task" in feed.content %}
+                                    <a class="link" href="{% url 'myteam:taskspage' %}#team-tasks">{{ feed.content }}</a>
+                                {% elif "New team message" in feed.subject and feed.team %}
+                                    <a class="link" href="{% url 'myteam:team_chat' feed.team.id %}">{{ feed.content }}</a>
+                                {% endif %}
                                 <small style="color: #6d6d6d;">{{ feed.timestamp|timesince}} ago</small>
                             </span>
                             <br>

@@ -25,6 +25,7 @@ class TeamMessages(models.Model):
     
     team = models.ForeignKey(Teams, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    members = models.ManyToManyField(User, related_name='teams')
     body = models.TextField()
     parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.SET_NULL)
     created = models.DateTimeField(auto_now_add=True)
@@ -96,6 +97,7 @@ class Feed(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now)
     seen = models.BooleanField(default=False)
+    team = models.ForeignKey('Teams', on_delete=models.CASCADE, null=True, blank=True)
     
     class Meta:
         ordering = ['-timestamp']
