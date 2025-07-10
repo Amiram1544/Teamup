@@ -97,7 +97,7 @@ class Feed(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now)
     seen = models.BooleanField(default=False)
-    team = models.ForeignKey('Teams', on_delete=models.CASCADE, null=True, blank=True)
+    team = models.ForeignKey(Teams, on_delete=models.CASCADE, null=True, blank=True)
     
     class Meta:
         ordering = ['-timestamp']
