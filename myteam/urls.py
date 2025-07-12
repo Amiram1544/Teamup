@@ -13,5 +13,6 @@ path('complete-task-ajax/', views.complete_task_ajax, name='complete-task-ajax')
 path('delete-task-ajax/', views.delete_task_ajax, name='delete-task-ajax'),
 path('news/', views.news, name='news'),
 path("team-task/<int:team_id>/", views.team_task, name="team_task"),
-path("get-user-tasks/", views.get_user_tasks, name='get-user-tasks')
+path("get-user-tasks/", views.get_user_tasks, name='get-user-tasks'),
+path("direct-messages/", views.pv, name='pv'),
 ]

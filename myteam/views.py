@@ -182,3 +182,7 @@ def get_user_tasks(request):
         'tasks': tasks,
     }
     return render(request, 'myteam/get_user_tasks.html', context)
+
+def pv(request):
+    
+    return render(request, 'myteam/pv.html')
