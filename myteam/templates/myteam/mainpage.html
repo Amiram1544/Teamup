@@ -24,7 +24,7 @@
     <div class="myteam-badges">
         <a href="{% url 'myteam:mainpage' %}" class="myteam-button" id="Teams">Teams</a>
         <a href="{% url 'myteam:taskspage' %}" class="myteam-button" id="Tasks">Tasks</a>
-        <a href="{% url 'myteam:pv' %}" class="myteam-button" id="PV">Private Chats</a>
+        <a href="{% url 'myteam:pv-view' user.username %}" class="myteam-button" id="PV">Private Chats</a>
     </div>
 
     <br>

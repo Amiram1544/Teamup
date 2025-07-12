@@ -29,6 +29,19 @@
                         </div>
                     {% endfor %}
                 </div>
+
+                <div class="texts-container">
+                    {% if target_user %}
+                        <h4 style="padding-left: 10px;">{{ target_user.username  }}</h4>
+
+                        {% for direct in directs %}
+                            <div class="texts {% if direct.sender == request.user %}right{% else %}left{% endif %}">
+                                <span>{{ direct.body }}</span>
+                                <small style="color: gray;">{{ direct.timesent }}</small>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div> 
         </div>
     </div>

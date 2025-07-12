@@ -206,7 +206,7 @@ def pv(request, username=None):
         directs = Directs.objects.filter(
             Q(sender=request.user , receiver=target_user) |
             Q(sender=target_user , receiver=request.user)
-            ).order_by("-timesent")
+            ).order_by("timesent")
     
     context = {
         'directs': directs,
