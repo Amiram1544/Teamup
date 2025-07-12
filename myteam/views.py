@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Teams, TeamMessages, ToDo, TeamTasks, Feed
+from .models import Teams, TeamMessages, ToDo, TeamTasks, Feed, Directs
 from django.contrib import messages
 from django.utils.timezone import now
 from django.http import JsonResponse
@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt #only for development
 from django.views.decorators.http import require_POST
 import json
 from django.utils import timezone
+from django.contrib.auth.models import User
+from django.db.models import Q
 
 
 # Create your views here.
@@ -183,6 +185,33 @@ def get_user_tasks(request):
     }
     return render(request, 'myteam/get_user_tasks.html', context)
 
-def pv(request):
+def get_conversation(user):
     
-    return render(request, 'myteam/pv.html')
+    texts = Directs.objects.filter(Q(sender=user) | Q(receiver= user))
+    users = set()
+    
+    for text in texts:
+        users.add(text.sender if text.sender!= user else text.receiver )
+    return list(users)
+
+def pv(request, username=None):
+    
+    users = get_conversation(request.user)
+    target_user = None
+    directs = []
+    
+    if username:
+        target_user = get_object_or_404(User, username=username)
+        
+        directs = Directs.objects.filter(
+            Q(sender=request.user , receiver=target_user) |
+            Q(sender=target_user , receiver=request.user)
+            ).order_by("-timesent")
+    
+    context = {
+        'directs': directs,
+        'users': users,
+        'target_user': target_user,
+    }
+    return render(request, 'myteam/pv.html', context)
+

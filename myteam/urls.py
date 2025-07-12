@@ -14,5 +14,6 @@ path('delete-task-ajax/', views.delete_task_ajax, name='delete-task-ajax'),
 path('news/', views.news, name='news'),
 path("team-task/<int:team_id>/", views.team_task, name="team_task"),
 path("get-user-tasks/", views.get_user_tasks, name='get-user-tasks'),
-path("direct-messages/", views.pv, name='pv'),
+path("direct-messages/", views.pv, name='inbox'),
+path("direct-messages/<str:username>", views.pv, name='pv-view')
 ]

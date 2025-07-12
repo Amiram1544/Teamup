@@ -104,3 +104,19 @@ class Feed(models.Model):
         
     def __str__(self):
         return f"{self.user.username}: {self.subject}"
+    
+    
+class Directs(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sent_directs", null=True, blank=True )
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="received_directs", null=True, blank=True)
+    parent = models.ForeignKey('self',null=True, blank=True, on_delete=models.SET_NULL)
+    body = models.TextField()
+    timesent = models.DateTimeField(auto_now_add=True)
+    seen = models.BooleanField(default=False)
+    
+    class Meta:
+        verbose_name_plural = "Directs"
+        ordering = ["timesent"]
+        
+    def __str__(self):
+        return self.body[:50]
