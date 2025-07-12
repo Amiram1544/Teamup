@@ -20,6 +20,23 @@ h4 {
 }
 
 /* SideBar */
+.people {
+
+    padding: 10px 20px;
+    margin: 10px;
+    border: solid 1px #fff ;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.people-info {
+    display: flex;
+    flex-direction: column;
+}
+.people-info strong {
+    padding-bottom: 5px;
+}
+
 .people a {
     
     display: inline-block;
@@ -30,6 +47,7 @@ h4 {
 }
 
 .people:hover a{
+
     text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff;
     font-size: 20px;
 }
