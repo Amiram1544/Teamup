@@ -1,0 +1,20 @@
+/* Back-ground */
+body {
+    background-color: rgb(46, 46, 46);
+}
+
+h4 {
+    color: white;
+}
+
+.container {
+
+    padding: 40px;
+    margin: 40px;
+    background-color: rgb(7, 7, 7);
+    border: solid  3px whitesmoke;
+    border-radius: 8px;
+    max-width: 100%;
+    max-height: max-content;
+    
+}
