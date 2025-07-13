@@ -17,6 +17,20 @@
 }
 .myteam-badges a {
     text-decoration: none;
+    color: black;
+    font-size: 16px;
+    border-bottom: none;
+    transition: font-size 0.3s ease-in;
+    transition: color 0.3 ease-in;
+    transition: border-bottom 0.3s ease-in;
+}
+
+.myteam-badges a:hover {
+
+    font-size: 18px;
+    color: #ef5cff;
+    border-bottom: 1px solid #e600ff;
+
 }
 
 .myteam-button {
