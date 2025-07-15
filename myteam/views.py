@@ -231,3 +231,19 @@ def get_unseen(request):
         unseen_count = request.user.activities.filter(user=request.user, seen=False).count()
         
         return JsonResponse({'unseen_count': unseen_count})
+    
+@login_required(login_url='login')
+@csrf_exempt  
+def delete_notif(request):
+    
+    if request.user.is_authenticated:
+            
+            data = json.loads(request.body)
+            feed_id = data.get('feed_id')
+            
+            try:
+                feed = Feed.objects.get(id=feed_id, user=request.user)
+                feed.delete()
+                return JsonResponse({'success': True})
+            except feed.DoesNotExist:
+                return JsonResponse({'success': False, 'error': 'Feed not found'}, status=404)

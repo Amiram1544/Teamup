@@ -16,5 +16,6 @@ path("team-task/<int:team_id>/", views.team_task, name="team_task"),
 path("get-user-tasks/", views.get_user_tasks, name='get-user-tasks'),
 path("direct-messages/", views.pv, name='inbox'),
 path("direct-messages/<str:username>/", views.pv, name='pv-view'),
-path("myteam/unseen_count/", views.get_unseen, name='unseen-count')
+path("myteam/unseen_count/", views.get_unseen, name='unseen-count'),
+path("delete-notif/", views.delete_notif, name='delete-notif'),
 ]
