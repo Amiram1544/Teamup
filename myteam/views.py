@@ -19,9 +19,9 @@ def mainpage(request):
     
     teams = Teams.objects.filter(members = request.user)
     
-    unseen = Feed.objects.filter(user=request.user, seen=False).count()
-    if unseen > 0:
-        unseen_count = unseen
+    unseen_count = Feed.objects.filter(user=request.user, seen=False).count()
+    if unseen_count < 0:
+        unseen_count = None
     
     for team in teams:
         team.first_members = team.members.all()[0:3]
@@ -164,6 +164,8 @@ def delete_task_ajax(request):
 def news(request):
     
     feeds = request.user.activities.all()[:20]
+    
+    request.user.activities.filter(seen=False).update(seen=True)
     
     context ={
         'feeds' : feeds,
