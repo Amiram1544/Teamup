@@ -64,7 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'myteam.context_processors.unseen_feed', # Custom to global unseen notifications count.
+                #'myteam.context_processors.unseen_feed', # Custom to global unseen notifications count.
             ],
         },
     },

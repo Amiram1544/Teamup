@@ -57,5 +57,28 @@
     </div>
 </div>
 
+<script>
+    function updateUnseenCount(){
 
+        fetch("{% url 'myteam:unseen-count' %}")
+        .then(response => response.json())
+        .then(data => {
+            const badge = document.querySelector('.unseen')
+            if (data.unseen_count > 0){
+
+                badge.textContent = data.unseen_count;
+                badge.style.display = "inline-block";
+
+            } else {
+
+                badge.style.display = "none";
+                badge.textContent = "";
+
+            }
+
+        });
+    }
+    setInterval(updateUnseenCount, 5000);
+    updateUnseenCount()
+</script>
 {% endblock content %}

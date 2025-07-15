@@ -224,14 +224,10 @@ def pv(request, username=None):
     }
     return render(request, 'myteam/pv.html', context)
 
-def get_unseen(user):
-    return Directs.objects.filter(receiver=user, seen=False).count()
+@login_required(login_url='login')
+def get_unseen(request):
 
-def user_useen(request):
-    
-    unseen_count = get_unseen(request.user)
-    
-    context ={
-        'unseen_count': unseen_count,
+    if request.user.is_authenticated:
+        unseen_count = request.user.activities.filter(user=request.user, seen=False).count()
         
-    }
+        return JsonResponse({'unseen_count': unseen_count})
