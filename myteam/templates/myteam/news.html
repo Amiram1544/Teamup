@@ -40,6 +40,12 @@
                                     <a class="link" href="{% url 'myteam:taskspage' %}#team-tasks">{{ feed.content }}</a>
                                 {% elif "New team message" in feed.subject and feed.team %}
                                     <a class="link" href="{% url 'myteam:team_chat' feed.team.id %}">{{ feed.content }}</a>
+                                {% elif "New Direct Message" in feed.subject %}
+                                    {% if feed.sender_user %}
+                                        <a class="link" href="{% url 'myteam:pv-view' feed.sender_user.username %}">{{ feed.content }}</a>
+                                    {% else %}
+                                        <span>{{ feed.content }} (Sender not available)</span>
+                                    {% endif %}
                                 {% endif %}
                                 <small style="color: #6d6d6d;">{{ feed.timestamp|timesince}} ago</small>
                             </span>

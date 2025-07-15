@@ -1,6 +1,6 @@
 from django.db.models.signals import m2m_changed, post_save 
 from django.dispatch import receiver
-from .models import TeamTasks, Feed, TeamMessages
+from .models import TeamTasks, Feed, TeamMessages, Directs
 from django.utils import timezone
 
 
@@ -29,3 +29,18 @@ def new_message_notify(sender, instance, created, **kwargs):
                timestamp = timezone.now(),
                team=team,
             )
+            
+@receiver(post_save, sender=Directs)           
+def unseen_message(sender, instance, created, **kwargs):
+    
+    if created:
+        receiver = instance.receiver
+        senderUser = instance.sender
+        
+        Feed.objects.create(
+            user = receiver,
+            subject = "New Direct Message",
+            content = f"New message from {senderUser.username} : {instance.body[:30]}",
+            sender_user = senderUser,
+            timestamp = timezone.now(),
+        )

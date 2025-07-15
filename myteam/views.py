@@ -170,6 +170,7 @@ def team_task(request, team_id):
     team = get_object_or_404(Teams, id= team_id)
     tasks = TeamTasks.objects.filter(team=team)
     
+    
     context = {
         'tasks': tasks,
     }
@@ -215,3 +216,14 @@ def pv(request, username=None):
     }
     return render(request, 'myteam/pv.html', context)
 
+def get_unseen(user):
+    return Directs.objects.filter(receiver=user, seen=False).count()
+
+def user_useen(request):
+    
+    unseen_count = get_unseen(request.user)
+    
+    context ={
+        'unseen_count': unseen_count,
+        
+    }
