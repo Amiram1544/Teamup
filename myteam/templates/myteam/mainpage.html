@@ -13,8 +13,12 @@
         <h1>My Team</h1>
 
         <div class="header-icons">
-            <a class="myteam-news" href="{% url 'myteam:news' %}">news</a>
-
+            <span class="news">
+                <a class="myteam-news" href="{% url 'myteam:news' %}">news</a>  
+                {% if unseen_count %}
+                    <span class="unseen">{{ unseen_count }}</span>
+                {% endif %}
+            </span>
             <!-- Temperory Profile tag, later replace it with profile image-->
             <!-- When it clicked like gmail some dropdown dedicated to settings -->
             <a class="myteam-profile" href="{% url 'profile' %}">Profile</a>

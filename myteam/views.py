@@ -18,12 +18,18 @@ from django.db.models import Q
 def mainpage(request):
     
     teams = Teams.objects.filter(members = request.user)
+    
+    unseen = Feed.objects.filter(user=request.user, seen=False).count()
+    if unseen > 0:
+        unseen_count = unseen
+    
     for team in teams:
         team.first_members = team.members.all()[0:3]
         team.other_members_count = team.members.count() - 3
            
     context = {
         'teams': teams,
+        'unseen_count': unseen_count,
     }
     return render(request, 'myteam/mainpage.html', context)
 
